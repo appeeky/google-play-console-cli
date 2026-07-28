@@ -1,0 +1,88 @@
+---
+title: Authentication
+description: Local-first service account credentials for gps and gps-mcp.
+---
+
+## Service account setup
+
+1. In Google Cloud, create a **service account** and enable the **Google Play Android Developer API**.
+2. Download a JSON key.
+3. In [Play Console](https://play.google.com/console) → **Users and permissions**, invite the service account email and grant app / account permissions.
+4. Store the key securely. Do not commit it to source control.
+
+<Warning>
+Treat service-account keys as secrets. If a key is exposed, rotate it in Google Cloud and revoke the old key.
+</Warning>
+
+## Credential precedence
+
+Resolved in this order:
+
+1. `--credentials <path|json>` (CLI / MCP flag)
+2. `GPS_CREDENTIALS` or `GOOGLE_PLAY_CREDENTIALS` (path or inline JSON)
+3. `GOOGLE_APPLICATION_CREDENTIALS` (path)
+4. `~/.config/gps/config.json` → `{ "credentialsPath": "/path/to/key.json" }`
+
+## Examples
+
+```bash
+# Env path
+export GOOGLE_APPLICATION_CREDENTIALS=$HOME/.secrets/play-sa.json
+gps whoami
+
+# Flag path
+gps --credentials ./sa.json whoami
+
+# Inline JSON (escape carefully; prefer files)
+gps --credentials '{"type":"service_account",...}' whoami
+```
+
+Config file:
+
+```json
+{
+  "credentialsPath": "/Users/you/.secrets/play-sa.json"
+}
+```
+
+## MCP
+
+Pass credentials the same way:
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "args": ["--credentials", "/path/to/service-account.json"]
+    }
+  }
+}
+```
+
+Or via env on the MCP process:
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/service-account.json"
+      }
+    }
+  }
+}
+```
+
+## Multi-account
+
+For multiple service-account keys and a local app registry, see [Multi-account and apps](/authentication-accounts).
+
+## Write safety
+
+| Mechanism | Behavior |
+|-----------|----------|
+| `--confirm` (CLI) | Required for write subcommands and `gps call` on write ops |
+| `--read-only` | Blocks mutations; ephemeral read edits still allowed |
+| MCP `--read-only` | Same as CLI read-only |

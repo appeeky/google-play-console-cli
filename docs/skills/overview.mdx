@@ -1,0 +1,75 @@
+---
+title: Agent skills
+description: Install gps workflow skills for Cursor, Claude Code, Codex, and other agents.
+---
+
+Agent skills teach Cursor, Claude Code, and other agents how to run Google Play tasks with the correct `gps` / `gps-mcp` commands.
+
+They follow the open [Agent Skills](https://agentskills.io/) format and install with the [Skills CLI](https://github.com/vercel-labs/skills) (`npx skills`).
+
+## Install
+
+Recommended after installing the CLI:
+
+```bash
+npm install -g @appeeky/google-play-store-cli
+gps install-skills
+```
+
+This installs **all** gps skills for **Cursor** and **Claude Code**, globally (`-g`).
+
+```bash
+# Project-local only
+gps install-skills --no-global
+
+# Extra agents
+gps install-skills -a cursor -a claude-code -a codex
+```
+
+Or with the Skills CLI from a clone of [appeeky/google-play-store-cli](https://github.com/appeeky/google-play-store-cli):
+
+```bash
+npx skills add ./skills --skill '*' -a cursor -a claude-code -g -y
+```
+
+From GitHub:
+
+```bash
+npx skills add appeeky/google-play-store-cli --skill '*' -a cursor -a claude-code -g -y
+```
+
+| Agent | Project | Global (`-g`) |
+|-------|---------|---------------|
+| Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+
+Restart the agent / IDE window after installing.
+
+## Skills vs MCP
+
+| Piece | Role |
+|-------|------|
+| **Skills** | Workflow instructions the agent follows |
+| **`gps-mcp`** | Live tools that call Google Play |
+
+Install skills **and** configure MCP for the best results. See [MCP setup](/mcp/setup).
+
+## Available skills
+
+| Skill | Use for |
+|-------|---------|
+| `gps-cli` | General CLI usage |
+| `gps-accounts` | Multi-key accounts + local app registry |
+| `gps-auth` | Credentials and read-only mode |
+| `gps-mcp` | MCP server setup |
+| `gps-ops` | Full operation registry / `gps call` |
+| `gps-release` | Deploy, promote, rollout, halt |
+| `gps-listings` | Listing text and images |
+| `gps-reviews` | List and reply to reviews |
+| `gps-testers` | Track testers |
+| `gps-monetization` | Subscriptions, OTP, IAP |
+| `gps-purchases` | Purchase tokens and refunds |
+| `gps-internal-sharing` | Internal app sharing uploads |
+| `gps-users` | Console users and grants |
+| `gps-compliance` | Data safety, recovery, device tiers |
+| `gps-troubleshooting` | Common errors |

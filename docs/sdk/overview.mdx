@@ -1,0 +1,23 @@
+---
+title: SDK overview
+description: Shared TypeScript client used by gps and gps-mcp (workspace package).
+---
+
+The Publisher client lives in the monorepo as `@appeeky/google-play-store-core`.
+
+It is **not published separately** on npm — it is bundled into `@appeeky/google-play-store-cli`. For programmatic use today, depend on this repo / workspace, or open an issue if you need a standalone SDK package.
+
+```ts
+import { PlayStoreClient } from "@appeeky/google-play-store-core";
+
+const client = await PlayStoreClient.create({
+  credentials: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+  readOnly: false,
+});
+
+console.log(client.clientEmail);
+
+const tracks = await client.tracks.listAll("com.example.app");
+```
+
+Next: [PlayStoreClient](/sdk/client).

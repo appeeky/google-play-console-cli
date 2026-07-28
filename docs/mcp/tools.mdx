@@ -1,0 +1,75 @@
+---
+title: MCP tools
+description: How MCP tools map to the shared operations registry.
+---
+
+Every entry in `GPS_OPS` is registered as an MCP tool with the same name and argument schema.
+
+Additional discovery tools:
+
+| Tool | Description |
+|------|-------------|
+| `gps_search_capabilities` | Search operations by query |
+| `gps_list_capabilities` | List all operations |
+
+## Examples
+
+**Accounts / apps**
+
+```json
+{ "name": "gps_list_accounts", "arguments": {} }
+```
+
+```json
+{ "name": "gps_list_apps", "arguments": { "account": "phosum" } }
+```
+
+**Identity**
+
+```json
+{ "name": "gps_whoami", "arguments": { "account": "phosum" } }
+```
+
+**Reviews**
+
+```json
+{
+  "name": "gps_list_reviews",
+  "arguments": {
+    "account": "phosum",
+    "packageName": "com.example.app",
+    "maxResults": 20,
+    "translationLanguage": "en"
+  }
+}
+```
+
+**Tracks**
+
+```json
+{
+  "name": "gps_list_tracks",
+  "arguments": { "packageName": "com.example.app" }
+}
+```
+
+**Reply (write)**
+
+```json
+{
+  "name": "gps_reply_to_review",
+  "arguments": {
+    "packageName": "com.example.app",
+    "reviewId": "REVIEW_ID",
+    "replyText": "Thanks for the feedback!"
+  }
+}
+```
+
+If `packageName` is registered under exactly one account in config, `account` can be omitted.
+
+## Full catalog
+
+See [Operations reference](/reference/operations) for every tool name, group, and write/read mode.
+
+CLI equivalent: `gps call <toolName> '<json>'`.

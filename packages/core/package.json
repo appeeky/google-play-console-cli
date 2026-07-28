@@ -1,0 +1,34 @@
+{
+  "name": "@appeeky/google-play-store-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reusable Google Play Android Publisher API v3 client (internal workspace package)",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --dir src"
+  },
+  "dependencies": {
+    "google-auth-library": "^10.9.1",
+    "googleapis": "^173.0.0",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2"
+  }
+}

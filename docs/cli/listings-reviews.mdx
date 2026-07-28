@@ -1,0 +1,34 @@
+---
+title: Listings & reviews
+description: Store listing and review CLI commands.
+---
+
+## listings
+
+```bash
+gps -p com.example.app listings list
+gps -p com.example.app listings get en-US
+gps -p com.example.app listings update en-US \
+  --title "My App" \
+  --short-description "Pitch" \
+  --full-description "..." \
+  --confirm
+```
+
+Images: use `gps call gps_list_images` / `gps_upload_image` (see [Manage listings](/guides/manage-listings)).
+
+## reviews
+
+```bash
+gps -p com.example.app reviews list --json
+gps -p com.example.app reviews list --max-results 20 --translation-language en
+gps -p com.example.app reviews get REVIEW_ID
+gps -p com.example.app reviews reply REVIEW_ID "Thanks!" --confirm
+```
+
+## testers
+
+```bash
+gps -p com.example.app testers get internal
+gps -p com.example.app testers update internal --emails a@x.com,b@y.com --confirm
+```

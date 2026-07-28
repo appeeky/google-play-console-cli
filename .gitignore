@@ -1,0 +1,20 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*-key.json
+service-account*.json
+.credentials/
+.turbo/
+*.log
+.vscode/
+.idea/
+
+# Copied into the CLI package on prepack
+packages/cli/skills/
+packages/cli/README.md

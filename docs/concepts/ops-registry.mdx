@@ -1,0 +1,37 @@
+---
+title: Ops registry
+description: GPS_OPS — one registry for MCP tools and gps call / gps ops.
+---
+
+`GPS_OPS` is the shared catalog of every high-level operation.
+
+Each entry has:
+
+| Field | Meaning |
+|-------|---------|
+| `name` | Stable id, e.g. `gps_list_reviews` |
+| `group` | `tracks`, `monetization`, … |
+| `summary` | Short description |
+| `write` | Whether it mutates Play state |
+| `shape` | Zod schema for arguments |
+| `run` | `(client, args) => Promise` |
+
+## Surfaces
+
+| Surface | How |
+|---------|-----|
+| MCP | `registerTools` registers every op + discovery helpers |
+| CLI discovery | `gps ops [query]`, `gps capabilities`, `gps search` |
+| CLI invoke | `gps call <name> '<json>'` |
+| Programmatic | `listOps`, `getOp`, `invokeOp` from `@appeeky/google-play-store-core` |
+
+## Example
+
+```bash
+gps ops review
+gps call gps_list_reviews '{"packageName":"com.example.app","maxResults":10}'
+```
+
+MCP equivalent tool: `gps_list_reviews` with the same JSON fields.
+
+Full list: [Operations reference](/reference/operations).

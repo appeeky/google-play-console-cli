@@ -1,0 +1,24 @@
+---
+title: Monetization commands
+description: subscriptions, otp, iap, and convert-prices CLI commands.
+---
+
+```bash
+gps --package com.example.app subscriptions list
+gps --package com.example.app subscriptions get PRODUCT_ID
+gps --package com.example.app subscriptions delete PRODUCT_ID --confirm
+
+gps --package com.example.app otp list
+gps --package com.example.app otp get PRODUCT_ID
+
+gps --package com.example.app iap list
+gps --package com.example.app iap get SKU
+gps --package com.example.app iap delete SKU --confirm
+
+gps --package com.example.app convert-prices \
+  --currency USD \
+  --units 4 \
+  --nanos 990000000
+```
+
+Create/patch/batch monetization APIs are available through [gps call](/cli/call-ops) and MCP tools. See [Operations reference](/reference/operations#monetization).

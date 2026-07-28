@@ -1,0 +1,25 @@
+---
+title: Accounts and apps CLI
+description: gps accounts and gps apps commands for multi-key setups.
+---
+
+## accounts
+
+```bash
+gps accounts list
+gps accounts add <id> --credentials /path/to/sa.json [--default-package com.example.app] [--default]
+gps accounts use <id>
+```
+
+## apps
+
+```bash
+gps apps list [--account <id>]
+gps apps add <packageName> --account <id> [--name "Display"] [--default]
+gps apps remove <packageName> --account <id>
+gps apps check [--account <id>]
+```
+
+`apps list` reads the **local registry**. It does not call a Google “list all apps” API (Publisher does not provide one).
+
+Full guide: [Multi-account and apps](/authentication-accounts).

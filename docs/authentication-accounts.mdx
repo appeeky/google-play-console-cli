@@ -1,0 +1,80 @@
+---
+title: Multi-account and apps
+description: Use multiple service-account keys and a local app registry.
+---
+
+## Important
+
+| Fact | Detail |
+|------|--------|
+| One key ≠ one app | A single service account can access **every app** you grant it in Play Console |
+| No Publisher `list_apps` | Google’s Android Publisher API has **no** endpoint to enumerate developer apps |
+| Local registry | `gps apps` stores package names under named accounts in `~/.config/gps/config.json` |
+
+To operate on an app you must know its `packageName` (or register it locally). Grant the service account access to each app (or account-level access) in Play Console.
+
+## Configure accounts (multiple keys)
+
+```bash
+gps accounts add phosum --credentials /secrets/phosum-sa.json --default-package com.phosum --default
+gps accounts add acme --credentials /secrets/acme-sa.json --default-package com.acme.app
+gps accounts list
+gps accounts use phosum
+```
+
+## Register apps
+
+```bash
+gps apps add com.phosum --account phosum --name "Phosum" --default
+gps apps add com.other.app --account phosum --name "Other"
+gps apps add com.acme.app --account acme --name "Acme"
+gps apps list
+gps apps check   # probes listings access per registered package
+```
+
+Example config (`~/.config/gps/config.json`):
+
+```json
+{
+  "defaultAccount": "phosum",
+  "accounts": {
+    "phosum": {
+      "credentialsPath": "/secrets/phosum-sa.json",
+      "defaultPackage": "com.phosum",
+      "apps": [
+        { "packageName": "com.phosum", "displayName": "Phosum" },
+        { "packageName": "com.other.app", "displayName": "Other" }
+      ]
+    },
+    "acme": {
+      "credentialsPath": "/secrets/acme-sa.json",
+      "defaultPackage": "com.acme.app",
+      "apps": [
+        { "packageName": "com.acme.app", "displayName": "Acme" }
+      ]
+    }
+  }
+}
+```
+
+## Use
+
+```bash
+gps --account phosum --package com.phosum tracks list
+gps --account acme reviews list
+
+# If a package is registered under exactly one account, --account can be omitted:
+gps --package com.phosum tracks list
+```
+
+## MCP
+
+- Optional tool argument: `account`
+- If `packageName` is registered under exactly one account, that account is selected automatically
+- Tools: `gps_list_accounts`, `gps_list_apps`, `gps_register_account`, `gps_register_app`, `gps_unregister_app`, `gps_set_default_account`
+
+```bash
+gps-mcp --account phosum --credentials /secrets/phosum-sa.json
+```
+
+Or rely on config accounts without `--credentials` when `credentialsPath` is set per account.

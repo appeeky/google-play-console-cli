@@ -1,0 +1,26 @@
+---
+title: Releases
+description: deploy and tracks CLI commands.
+---
+
+## deploy
+
+```bash
+gps -p com.example.app deploy \
+  --file ./app-release.aab \
+  --track internal \
+  --release-notes "Fixes" \
+  --confirm
+```
+
+## tracks
+
+```bash
+gps -p com.example.app tracks list
+gps -p com.example.app tracks get production
+gps -p com.example.app tracks promote --from beta --to production --user-fraction 0.05 --confirm
+gps -p com.example.app tracks rollout production --user-fraction 0.25 --confirm
+gps -p com.example.app tracks halt production --confirm
+```
+
+Guides: [Deploy a release](/guides/deploy-release), [Staged rollout](/guides/staged-rollout).

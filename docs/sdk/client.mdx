@@ -1,0 +1,63 @@
+---
+title: PlayStoreClient
+description: Create a client, call resource APIs, and invoke registered operations.
+---
+
+## Create
+
+```ts
+import { PlayStoreClient } from "@appeeky/google-play-store-core";
+
+const client = await PlayStoreClient.create({
+  // path, inline JSON, or omit to use env / config file
+  credentials: "/path/to/sa.json",
+  readOnly: true,
+});
+```
+
+Credential resolution matches the CLI. See [Authentication](/authentication).
+
+## Resource namespaces
+
+Examples (not exhaustive):
+
+```ts
+await client.reviews.list(packageName);
+await client.tracks.listAll(packageName);
+await client.listings.listAllListings(packageName);
+await client.monetization.listSubscriptions(packageName);
+await client.purchases.getSubscription(packageName, token);
+await client.orders.get(packageName, orderId);
+await client.deploy.uploadAndAssign({ ... });
+```
+
+Writes throw `ReadOnlyError` when the client was created with `readOnly: true`.
+
+## Invoke by operation name
+
+```ts
+import { invokeOp, listOps } from "@appeeky/google-play-store-core";
+
+const monetizationOps = listOps("subscription");
+
+const result = await invokeOp(client, "gps_list_reviews", {
+  packageName: "com.example.app",
+  maxResults: 10,
+});
+```
+
+## Edits
+
+Prefer high-level helpers. For custom edit sessions:
+
+```ts
+await client.edits.withEdit(packageName, async (editId) => {
+  // mutations using editId
+});
+
+await client.edits.withEphemeralEdit(packageName, async (editId) => {
+  // reads using editId; edit is deleted afterward
+});
+```
+
+See [Edits](/concepts/edits).

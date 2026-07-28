@@ -1,0 +1,33 @@
+---
+title: Reply to reviews
+description: List Play Store reviews and send developer replies.
+---
+
+## List
+
+```bash
+gps --package com.example.app --json reviews list
+gps --package com.example.app reviews list --max-results 20 --translation-language en
+```
+
+<Note>
+The Android Publisher `reviews.list` API only returns a limited recent window of reviews that can be answered via the API (typically about the last seven days). An empty list usually means there are no eligible reviews right now — not that auth failed.
+</Note>
+
+## Get one
+
+```bash
+gps --package com.example.app reviews get REVIEW_ID
+```
+
+## Reply
+
+```bash
+gps --package com.example.app reviews reply REVIEW_ID \
+  "Thanks for the feedback — we shipped a fix in 3.0.0!" \
+  --confirm
+```
+
+## MCP
+
+Tools: `gps_list_reviews`, `gps_get_review`, `gps_reply_to_review`.

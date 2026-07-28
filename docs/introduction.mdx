@@ -1,0 +1,65 @@
+---
+title: Introduction
+description: CLI, MCP, and TypeScript SDK for the Google Play Android Publisher API.
+---
+
+![Appeeky — CLI, MCP, and TypeScript SDK for the Google Play Android Publisher API](/images/hero-appeeky.png)
+
+# Google Play Store CLI
+
+Operate Google Play apps from the terminal, automation, and AI agents using the [Android Publisher API v3](https://developers.google.com/android-publisher).
+
+**Powered by [Appeeky](https://appeeky.com).** Open source on [GitHub](https://github.com/appeeky/google-play-store-cli) under the [MIT License](https://github.com/appeeky/google-play-store-cli/blob/main/LICENSE).
+
+Use the same authenticated client through:
+
+- **`gps`** / **`gps-mcp`** — install with `npm install -g @appeeky/google-play-store-cli`
+- **TypeScript SDK** — `@appeeky/google-play-store-core` in this monorepo (bundled into the CLI; see [SDK](/sdk/overview))
+
+## Capabilities
+
+- Deploy AABs and APKs to release tracks, including staged rollouts
+- Manage store listings and listing images
+- List and reply to reviews
+- Manage subscriptions, one-time products, and in-app products
+- Inspect purchases and refund orders
+- Manage Play Console users and app grants
+- Internal app sharing, data safety, app recovery, and device tier configs
+- Multiple service-account keys with a local app registry (`gps accounts` / `gps apps`)
+
+## Components
+
+| Package | Entry point | Description |
+|---------|-------------|-------------|
+| `@appeeky/google-play-store-cli` | `gps`, `gps-mcp` | Published npm package |
+
+CLI and MCP share one operation registry, so agent tools and CLI commands stay aligned.
+
+## Scope
+
+This product covers the Android Publisher API surface for app publishing and monetization operations.
+
+It does **not** include Play Developer Reporting (vitals), GCS report-import pipelines, or public Play Store scraping. See [Scope](/reference/scope).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Install, authenticate, and run your first command.
+  </Card>
+  <Card title="MCP setup" icon="robot" href="/mcp/setup">
+    Connect `gps-mcp` to your agent environment.
+  </Card>
+  <Card title="Deploy a release" icon="upload" href="/guides/deploy-release">
+    Upload an AAB and assign it to a track.
+  </Card>
+  <Card title="Agent skills" icon="sparkles" href="/skills/overview">
+    Install skills for Cursor, Claude Code, and other agents.
+  </Card>
+  <Card title="Multi-account" icon="users" href="/authentication-accounts">
+    Multiple keys and a local app registry.
+  </Card>
+  <Card title="Operations reference" icon="list" href="/reference/operations">
+    Full catalog of shared CLI and MCP operations.
+  </Card>
+</CardGroup>

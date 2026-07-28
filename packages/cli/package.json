@@ -1,0 +1,64 @@
+{
+  "name": "@appeeky/google-play-store-cli",
+  "version": "0.1.2",
+  "description": "gps + gps-mcp — Google Play Store CLI and MCP server (Android Publisher API v3)",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "gps": "./dist/bin.js",
+    "gps-mcp": "./dist/mcp-bin.js"
+  },
+  "files": [
+    "dist/bin.js",
+    "dist/bin.js.map",
+    "dist/mcp-bin.js",
+    "dist/mcp-bin.js.map",
+    "skills",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/bin.js",
+  "types": "./dist/bin.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appeeky/google-play-store-cli.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/appeeky/google-play-store-cli#readme",
+  "bugs": {
+    "url": "https://github.com/appeeky/google-play-store-cli/issues"
+  },
+  "keywords": [
+    "google-play",
+    "android-publisher",
+    "cli",
+    "mcp",
+    "gps",
+    "gps-mcp",
+    "appeeky"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node ./scripts/bundle.mjs",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepack": "node ./scripts/prepare-publish.mjs",
+    "postpack": "node ./scripts/postpack.mjs"
+  },
+  "dependencies": {
+    "@appeeky/google-play-store-core": "workspace:*",
+    "@appeeky/google-play-store-mcp": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "commander": "^13.1.0",
+    "google-auth-library": "^10.9.1",
+    "googleapis": "^173.0.0",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.4",
+    "typescript": "^5.8.3"
+  }
+}

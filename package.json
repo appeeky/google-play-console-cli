@@ -1,0 +1,29 @@
+{
+  "name": "google-play-store-cli",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local-first Google Play Store CLI and MCP — Android Publisher API v3",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r --parallel run dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r run typecheck",
+  "gps": "pnpm --filter @appeeky/google-play-store-cli exec gps",
+  "gps-mcp": "pnpm --filter @appeeky/google-play-store-cli exec gps-mcp"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2"
+  }
+}

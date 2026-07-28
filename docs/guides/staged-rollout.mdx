@@ -1,0 +1,45 @@
+---
+title: Staged rollout
+description: Promote between tracks and control production user fraction.
+---
+
+## Inspect tracks
+
+```bash
+gps --package com.example.app --json tracks list
+gps --package com.example.app tracks get production
+```
+
+## Promote
+
+```bash
+gps --package com.example.app tracks promote \
+  --from internal \
+  --to beta \
+  --confirm
+```
+
+## Update fraction
+
+```bash
+gps --package com.example.app tracks rollout production \
+  --user-fraction 0.1 \
+  --confirm
+
+gps --package com.example.app tracks rollout production \
+  --user-fraction 0.5 \
+  --confirm
+```
+
+## Halt
+
+```bash
+gps --package com.example.app tracks halt production --confirm
+```
+
+## Ops equivalents
+
+- `gps_promote_release`
+- `gps_update_rollout`
+- `gps_halt_release`
+- `gps_list_tracks` / `gps_get_track`

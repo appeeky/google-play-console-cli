@@ -1,0 +1,220 @@
+---
+title: Operations reference
+description: Complete GPS_OPS registry — shared by CLI (gps call / gps ops) and MCP tools.
+---
+
+Every operation below is available as:
+
+- an MCP tool with the same name
+- `gps call <name> '<json>'`
+- `gps ops [query]` for discovery
+
+Write operations are marked **write** and require `--confirm` on the CLI (or agent confirmation for MCP).
+
+Most Publisher tools also accept an optional `account` argument for multi-key setups. See [Multi-account and apps](/authentication-accounts).
+
+Total operations: **129**
+
+## accounts
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_accounts` | read | List configured Play developer accounts (local multi-key registry) |
+| `gps_list_apps` | read | List locally registered apps (optionally filtered by account) |
+| `gps_register_account` | **write** | Register or update a named account with a service-account key path |
+| `gps_register_app` | **write** | Register a package name under an account (local app registry) |
+| `gps_unregister_app` | **write** | Remove a package from the local app registry |
+| `gps_set_default_account` | **write** | Set the default account id in local config |
+
+## meta
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_whoami` | read | Show authenticated service account email and read-only mode |
+
+## reviews
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_reviews` | read | List Play Store reviews |
+| `gps_get_review` | read | Get a single review |
+| `gps_reply_to_review` | **write** | Reply to a review |
+
+## deploy
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_deploy_app` | **write** | Upload APK/AAB and assign to a track |
+
+## tracks
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_tracks` | read | List release tracks |
+| `gps_get_track` | read | Get a release track |
+| `gps_list_track_releases` | read | List releases on a track |
+| `gps_update_track` | **write** | Update a track inside a committed edit |
+| `gps_promote_release` | **write** | Promote a release between tracks |
+| `gps_update_rollout` | **write** | Update staged rollout fraction |
+| `gps_halt_release` | **write** | Halt an in-progress staged rollout |
+
+## listings
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_listings` | read | List all localized store listings |
+| `gps_get_listing` | read | Get a localized store listing |
+| `gps_update_listing` | **write** | Update a localized store listing |
+| `gps_delete_listing` | **write** | Delete a localized store listing |
+| `gps_delete_all_listings` | **write** | Delete all localized store listings |
+| `gps_list_images` | read | List listing images for language + image type |
+| `gps_upload_image` | **write** | Upload a listing image |
+| `gps_delete_image` | **write** | Delete a listing image by id |
+| `gps_delete_all_images` | **write** | Delete all listing images for language + type |
+
+## testers
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_get_testers` | read | Get testers for a track |
+| `gps_update_testers` | **write** | Update testers for a track |
+
+## monetization
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_subscriptions` | read | List subscriptions |
+| `gps_get_subscription` | read | Get a subscription |
+| `gps_create_subscription` | **write** | Create a subscription |
+| `gps_patch_subscription` | **write** | Patch a subscription |
+| `gps_delete_subscription` | **write** | Delete a subscription |
+| `gps_batch_get_subscriptions` | read | Batch get subscriptions |
+| `gps_batch_update_subscriptions` | **write** | Batch update subscriptions |
+| `gps_activate_base_plan` | **write** | Activate a subscription base plan |
+| `gps_deactivate_base_plan` | **write** | Deactivate a subscription base plan |
+| `gps_delete_base_plan` | **write** | Delete a subscription base plan |
+| `gps_migrate_base_plan_prices` | **write** | Migrate base plan prices |
+| `gps_batch_update_base_plan_states` | **write** | Batch activate/deactivate base plans |
+| `gps_batch_migrate_base_plan_prices` | **write** | Batch migrate base plan prices |
+| `gps_list_subscription_offers` | read | List subscription offers |
+| `gps_get_subscription_offer` | read | Get a subscription offer |
+| `gps_create_subscription_offer` | **write** | Create a subscription offer |
+| `gps_patch_subscription_offer` | **write** | Patch a subscription offer |
+| `gps_activate_subscription_offer` | **write** | Activate a subscription offer |
+| `gps_deactivate_subscription_offer` | **write** | Deactivate a subscription offer |
+| `gps_delete_subscription_offer` | **write** | Delete a subscription offer |
+| `gps_batch_get_subscription_offers` | read | Batch get subscription offers |
+| `gps_batch_update_subscription_offers` | **write** | Batch update subscription offers |
+| `gps_batch_update_subscription_offer_states` | **write** | Batch update subscription offer states |
+| `gps_list_one_time_products` | read | List one-time products |
+| `gps_get_one_time_product` | read | Get a one-time product |
+| `gps_patch_one_time_product` | **write** | Create or update a one-time product |
+| `gps_delete_one_time_product` | **write** | Delete a one-time product |
+| `gps_batch_get_one_time_products` | read | Batch get one-time products |
+| `gps_batch_update_one_time_products` | **write** | Batch update one-time products |
+| `gps_batch_delete_one_time_products` | **write** | Batch delete one-time products |
+| `gps_list_purchase_option_offers` | read | List purchase option offers |
+| `gps_activate_purchase_option_offer` | **write** | Activate a purchase option offer |
+| `gps_deactivate_purchase_option_offer` | **write** | Deactivate a purchase option offer |
+| `gps_cancel_purchase_option_offer` | **write** | Cancel a purchase option offer |
+| `gps_batch_delete_purchase_options` | **write** | Batch delete purchase options |
+| `gps_batch_update_purchase_option_states` | **write** | Batch update purchase option states |
+| `gps_batch_get_purchase_option_offers` | read | Batch get purchase option offers |
+| `gps_batch_update_purchase_option_offers` | **write** | Batch update purchase option offers |
+| `gps_batch_update_purchase_option_offer_states` | **write** | Batch update purchase option offer states |
+| `gps_batch_delete_purchase_option_offers` | **write** | Batch delete purchase option offers |
+| `gps_convert_region_prices` | read | Convert a price across Play regions |
+| `gps_list_in_app_products` | read | List legacy in-app products |
+| `gps_get_in_app_product` | read | Get a legacy in-app product |
+| `gps_create_in_app_product` | **write** | Create a legacy in-app product |
+| `gps_update_in_app_product` | **write** | Update a legacy in-app product |
+| `gps_patch_in_app_product` | **write** | Patch a legacy in-app product |
+| `gps_delete_in_app_product` | **write** | Delete a legacy in-app product |
+| `gps_batch_get_in_app_products` | read | Batch get legacy in-app products |
+| `gps_batch_update_in_app_products` | **write** | Batch update legacy in-app products |
+| `gps_batch_delete_in_app_products` | **write** | Batch delete legacy in-app products |
+
+## purchases
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_get_product_purchase` | read | Get in-app product purchase status |
+| `gps_get_product_purchase_v2` | read | Get in-app product purchase status (v2) |
+| `gps_acknowledge_product_purchase` | **write** | Acknowledge an in-app product purchase |
+| `gps_consume_product_purchase` | **write** | Consume a consumable in-app purchase |
+| `gps_get_subscription_purchase` | read | Get subscription purchase status (v2) |
+| `gps_cancel_subscription` | **write** | Cancel a subscription purchase |
+| `gps_defer_subscription` | **write** | Defer a subscription renewal |
+| `gps_revoke_subscription` | **write** | Revoke a subscription purchase |
+| `gps_acknowledge_subscription` | **write** | Acknowledge a subscription purchase (v1) |
+| `gps_list_voided_purchases` | read | List voided purchases |
+
+## orders
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_get_order` | read | Get order details |
+| `gps_batch_get_orders` | read | Batch get orders |
+| `gps_refund_order` | **write** | Refund an order |
+| `gps_get_external_transaction` | read | Get an external transaction |
+| `gps_create_external_transaction` | **write** | Create an external transaction |
+| `gps_refund_external_transaction` | **write** | Refund an external transaction |
+
+## users
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_users` | read | List Play Console users |
+| `gps_create_user` | **write** | Create / invite a Play Console user |
+| `gps_patch_user` | **write** | Update a Play Console user |
+| `gps_delete_user` | **write** | Remove a Play Console user |
+| `gps_create_grant` | **write** | Grant app-level access to a user |
+| `gps_patch_grant` | **write** | Update an app-level grant |
+| `gps_delete_grant` | **write** | Remove an app-level grant |
+
+## artifacts
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_list_apks` | read | List APKs in a temporary edit |
+| `gps_list_bundles` | read | List bundles in a temporary edit |
+| `gps_upload_apk` | **write** | Upload an APK into a committed edit |
+| `gps_upload_bundle` | **write** | Upload an AAB into a committed edit |
+| `gps_add_externally_hosted_apk` | **write** | Add an externally hosted APK to an edit |
+| `gps_upload_deobfuscation_file` | **write** | Upload a deobfuscation/mapping file |
+| `gps_get_expansion_file` | read | Get expansion file info |
+| `gps_upload_expansion_file` | **write** | Upload an expansion file |
+| `gps_get_app_details` | read | Get app details from a temporary edit |
+| `gps_patch_app_details` | **write** | Patch app details |
+| `gps_get_country_availability` | read | Get country availability for a track |
+| `gps_upload_internal_sharing` | **write** | Upload APK/AAB to internal app sharing |
+| `gps_list_generated_apks` | read | List Play-generated APKs for a version code |
+| `gps_download_generated_apk` | read | Download a Play-generated APK |
+| `gps_list_system_apk_variants` | read | List system APK variants |
+| `gps_get_system_apk_variant` | read | Get a system APK variant |
+| `gps_create_system_apk_variant` | **write** | Create a system APK variant |
+| `gps_download_system_apk_variant` | read | Download a system APK variant |
+
+## compliance
+
+| Name | Mode | Summary |
+|------|------|----------|
+| `gps_set_data_safety` | **write** | Set data safety labels declaration |
+| `gps_list_app_recoveries` | read | List app recovery actions |
+| `gps_create_app_recovery` | **write** | Create a draft app recovery action |
+| `gps_deploy_app_recovery` | **write** | Deploy an app recovery action |
+| `gps_cancel_app_recovery` | **write** | Cancel an app recovery action |
+| `gps_add_app_recovery_targeting` | **write** | Add targeting to an app recovery action |
+| `gps_list_device_tier_configs` | read | List device tier configs |
+| `gps_get_device_tier_config` | read | Get a device tier config |
+| `gps_create_device_tier_config` | **write** | Create a device tier config |
+
+## Not included
+
+These are intentionally out of scope for this product:
+
+- GCS private report imports / Play Console CSV analytics pipelines
+- Play Developer Reporting API (vitals, crashes)
+- Public Play Store scraping
+- Native Publisher `list_apps` (not provided by Google; use `gps apps` local registry)
+- `appstorecatalog` and `orders.reviewRefund` (not present in the supported googleapis client)

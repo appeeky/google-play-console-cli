@@ -1,0 +1,41 @@
+---
+title: Manage listings
+description: Read and update localized store listings and images.
+---
+
+## List / get
+
+```bash
+gps --package com.example.app --json listings list
+gps --package com.example.app listings get en-US
+```
+
+## Update text
+
+```bash
+gps --package com.example.app listings update en-US \
+  --title "My App" \
+  --short-description "Short pitch under 80 chars" \
+  --full-description "Longer description..." \
+  --confirm
+```
+
+## Images via ops
+
+Image upload/list/delete are exposed through the ops registry:
+
+```bash
+gps call gps_list_images '{
+  "packageName": "com.example.app",
+  "language": "en-US",
+  "imageType": "phoneScreenshots"
+}'
+```
+
+Image types follow the Publisher API (`icon`, `featureGraphic`, `phoneScreenshots`, …).
+
+## Ops
+
+- `gps_list_listings`, `gps_get_listing`, `gps_update_listing`
+- `gps_delete_listing`, `gps_delete_all_listings`
+- `gps_list_images`, `gps_upload_image`, `gps_delete_image`, `gps_delete_all_images`

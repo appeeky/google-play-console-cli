@@ -1,0 +1,28 @@
+---
+title: Purchases and orders
+description: Inspect purchases, voided purchases, and refund orders.
+---
+
+## Purchases
+
+```bash
+gps --package com.example.app purchases product PRODUCT_ID TOKEN
+gps --package com.example.app purchases product-v2 PRODUCT_ID TOKEN
+gps --package com.example.app purchases ack-product PRODUCT_ID TOKEN --confirm
+gps --package com.example.app purchases consume PRODUCT_ID TOKEN --confirm
+
+gps --package com.example.app purchases subscription TOKEN
+gps --package com.example.app purchases cancel-subscription SUBSCRIPTION_ID TOKEN --confirm
+gps --package com.example.app purchases revoke-subscription SUBSCRIPTION_ID TOKEN --confirm
+
+gps --package com.example.app purchases voided
+```
+
+## Orders
+
+```bash
+gps --package com.example.app orders get ORDER_ID
+gps --package com.example.app orders refund ORDER_ID --confirm
+```
+
+Defer subscription, external transactions, and batch order helpers: [gps call](/cli/call-ops) / [operations](/reference/operations).

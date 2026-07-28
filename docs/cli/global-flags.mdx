@@ -1,0 +1,22 @@
+---
+title: Global flags
+description: Credentials, account, package, JSON, read-only, and confirm flags for gps.
+---
+
+| Flag | Description |
+|------|-------------|
+| `-c, --credentials <path\|json>` | Service account JSON path or inline JSON |
+| `-a, --account <id>` | Named account from `~/.config/gps/config.json` |
+| `-p, --package <name>` | Default application package name |
+| `--json` | Machine-readable JSON output |
+| `--read-only` | Block write operations |
+| `--confirm` | Required for destructive / mutating commands |
+
+```bash
+gps -a phosum -p com.phosum --json tracks list
+gps -c ./sa.json -p com.example.app deploy --file ./app.aab --track internal --confirm
+```
+
+- If `--package` is omitted, the account’s `defaultPackage` is used when configured.
+- `gps call` fills `packageName` from `--package` when the JSON body omits it.
+- Multi-key setup: [Multi-account and apps](/authentication-accounts).

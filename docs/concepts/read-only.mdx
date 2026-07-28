@@ -1,0 +1,32 @@
+---
+title: Read-only mode
+description: Block mutations while still allowing ephemeral read edits.
+---
+
+Pass `--read-only` to `gps` or `gps-mcp` to refuse user-facing writes.
+
+## Blocked
+
+- Deploy, track promote/rollout/halt
+- Listing/image updates
+- Review replies
+- Monetization create/patch/delete
+- Purchase acknowledge/consume/cancel/revoke
+- Order refunds
+- Explicit `edits.insert` / `edits.commit` / `edits.withEdit`
+
+## Allowed
+
+- Pure GET-style APIs (reviews list, subscriptions list, purchases get, …)
+- **Ephemeral edits** for read helpers (tracks list, listings list) — edit is deleted, never committed
+
+## When to use
+
+- Agent sessions that should only inspect production
+- CI dry-runs
+- Pairing with `--json` for safe automation
+
+```bash
+gps-mcp --read-only --credentials ./sa.json
+gps --read-only --package com.example.app tracks list
+```

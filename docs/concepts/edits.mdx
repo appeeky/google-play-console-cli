@@ -1,0 +1,29 @@
+---
+title: Edits
+description: How Play Console edits work for reads and writes in gps.
+---
+
+Google Play mutates many app resources inside an **edit** session: insert → change → commit (or delete).
+
+## Committed edits (`withEdit`)
+
+Used for writes: upload artifacts, update tracks/listings, etc.
+
+1. Insert edit
+2. Run mutations
+3. Commit (or validate-only then delete)
+4. On failure, delete the edit
+
+## Ephemeral edits (`withEphemeralEdit`)
+
+Used for **reads** that still require an edit id (tracks, listings, APK list, …):
+
+1. Insert edit
+2. Read
+3. Delete edit (never commit)
+
+Allowed under `--read-only` — nothing is published. Google still requires the service account to have edit permission.
+
+## CLI implications
+
+Commands like `gps tracks list` and `gps listings list` open ephemeral edits under the hood. You do not manage edit ids yourself unless you use lower-level ops.

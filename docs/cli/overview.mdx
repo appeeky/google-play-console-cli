@@ -1,0 +1,32 @@
+---
+title: CLI overview
+description: The gps binary — ergonomic commands plus full ops parity via gps call.
+---
+
+Binary: **`gps`** (from `npm install -g @appeeky/google-play-store-cli`)
+
+```bash
+gps --help
+gps <command> --help
+```
+
+## How to use it
+
+1. Use dedicated subcommands for common workflows (`reviews`, `tracks`, `deploy`, …).
+2. Use `gps ops` / `gps call` for any registered operation without a dedicated subcommand.
+3. Pass `-a/--account` and `-p/--package` (or configure defaults in `~/.config/gps/config.json`).
+4. Use `--json` for scripting; default table output is for interactive use.
+
+## Command groups
+
+| Group | Examples |
+|-------|----------|
+| Discovery | `whoami`, `search`, `capabilities`, `ops`, `call` |
+| Accounts | `accounts`, `apps` |
+| Releases | `deploy`, `tracks` |
+| Store | `listings`, `reviews`, `testers` |
+| Monetization | `subscriptions`, `otp`, `iap`, `convert-prices` |
+| Commerce | `purchases`, `orders` |
+| Console / artifacts | `users`, `internal-sharing`, `recovery`, `device-tiers` |
+
+Details in the pages under this section.

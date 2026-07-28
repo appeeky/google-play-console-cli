@@ -1,0 +1,35 @@
+---
+title: Monetization
+description: Subscriptions, one-time products, offers, and legacy IAPs.
+---
+
+## List catalogs
+
+```bash
+gps --package com.example.app --json subscriptions list
+gps --package com.example.app --json otp list
+gps --package com.example.app --json iap list
+```
+
+## Convert regional prices
+
+```bash
+gps --package com.example.app convert-prices \
+  --currency USD \
+  --units 4 \
+  --nanos 990000000
+```
+
+## Deeper mutations
+
+Create/patch/delete subscriptions, base plans, offers, OTP, and batch helpers are available via ops / MCP:
+
+```bash
+gps ops subscription
+gps call gps_get_subscription '{
+  "packageName": "com.example.app",
+  "productId": "premium_monthly"
+}'
+```
+
+See the [operations reference](/reference/operations#monetization) for the full monetization group (~50 ops).

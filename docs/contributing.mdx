@@ -1,0 +1,33 @@
+---
+title: Contributing
+description: Develop and extend the monorepo.
+---
+
+## Setup
+
+```bash
+pnpm install
+pnpm build
+pnpm test
+pnpm typecheck
+```
+
+## Package layout
+
+- `packages/core` — Publisher domain logic and `GPS_OPS`
+- `packages/cli` — `gps` CLI
+- `packages/mcp` — `gps-mcp` server
+
+Add API coverage in **core** first, register it in the ops registry, then add CLI shortcuts only where they improve common workflows. MCP tools are generated from the registry.
+
+## Tests
+
+Unit tests mock the googleapis publisher client via `PlayStoreClient.fromPublisher`.
+
+Optional live tests:
+
+```bash
+GPS_LIVE_TEST=1 GOOGLE_APPLICATION_CREDENTIALS=./sa.json pnpm test
+```
+
+Do not commit service-account keys.

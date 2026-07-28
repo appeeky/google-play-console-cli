@@ -1,0 +1,40 @@
+---
+title: Deploy a release
+description: Upload an AAB or APK and assign it to a Play track.
+---
+
+## CLI
+
+```bash
+gps --package com.example.app deploy \
+  --file ./app-release.aab \
+  --track internal \
+  --release-notes "Bug fixes" \
+  --confirm
+```
+
+Common options:
+
+| Flag | Description |
+|------|-------------|
+| `--file` | Path to `.aab` or `.apk` |
+| `--track` | `internal`, `alpha`, `beta`, `production`, or custom |
+| `--status` | Release status (e.g. `completed`, `draft`, `inProgress`) |
+| `--user-fraction` | Staged rollout fraction `0–1` |
+| `--release-notes` | Default-language release notes |
+| `--validate-only` | Validate edit without committing |
+
+## MCP / call
+
+```bash
+gps call gps_deploy_app '{
+  "packageName": "com.example.app",
+  "filePath": "./app-release.aab",
+  "track": "internal",
+  "releaseNotes": "Bug fixes"
+}'
+```
+
+## Next
+
+Continue with [Staged rollout](/guides/staged-rollout).

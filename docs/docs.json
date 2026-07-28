@@ -1,0 +1,116 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Google Play Store CLI",
+  "theme": "maple",
+  "colors": {
+    "primary": "#27272a",
+    "light": "#e4e4e7",
+    "dark": "#fafafa"
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "fonts": {
+    "family": "Geist",
+    "heading": {
+      "family": "Geist"
+    }
+  },
+  "background": {
+    "color": {
+      "light": "#fafafa",
+      "dark": "#050506"
+    }
+  },
+  "styling": {
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
+    }
+  },
+  "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://appeeky.com"
+  },
+  "description": "CLI, MCP, and TypeScript SDK for the Google Play Android Publisher API.",
+  "seo": {
+    "metatags": {
+      "og:site_name": "Google Play Store CLI",
+      "og:title": "Google Play Store CLI",
+      "og:description": "CLI, MCP, and TypeScript SDK for the Google Play Android Publisher API.",
+      "og:image": "https://gps.appeeky.com/images/hero-appeeky.png",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Google Play Store CLI",
+      "twitter:description": "CLI, MCP, and TypeScript SDK for the Google Play Android Publisher API.",
+      "twitter:image": "https://gps.appeeky.com/images/hero-appeeky.png"
+    }
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get started",
+        "pages": [
+          "introduction",
+          "quickstart",
+          "authentication",
+          "authentication-accounts",
+          "skills/overview",
+          "architecture"
+        ]
+      },
+      {
+        "group": "Concepts",
+        "pages": [
+          "concepts/edits",
+          "concepts/ops-registry",
+          "concepts/read-only"
+        ]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "guides/deploy-release",
+          "guides/staged-rollout",
+          "guides/reply-to-reviews",
+          "guides/manage-listings",
+          "guides/monetization"
+        ]
+      },
+      {
+        "group": "CLI",
+        "pages": [
+          "cli/overview",
+          "cli/global-flags",
+          "cli/accounts-apps",
+          "cli/discovery",
+          "cli/releases",
+          "cli/listings-reviews",
+          "cli/monetization",
+          "cli/purchases-orders",
+          "cli/call-ops"
+        ]
+      },
+      {
+        "group": "MCP",
+        "pages": ["mcp/overview", "mcp/setup", "mcp/tools"]
+      },
+      {
+        "group": "SDK",
+        "pages": ["sdk/overview", "sdk/client"]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "reference/operations",
+          "reference/scope",
+          "changelog",
+          "contributing"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+---
+title: Discovery
+description: whoami, search, capabilities, ops, and call.
+---
+
+## whoami
+
+```bash
+gps whoami
+gps --json whoami
+```
+
+Prints the authenticated service account email. With `--json`, also includes `account` and `defaultPackage` when resolved from config.
+
+## search / capabilities
+
+```bash
+gps search rollout
+gps capabilities --json
+```
+
+Capabilities are derived from `GPS_OPS`.
+
+## ops
+
+```bash
+gps ops
+gps ops monetization
+gps ops --json
+```
+
+Lists registry entries (`name`, `group`, `write`, `summary`).
+
+## call
+
+```bash
+gps call gps_list_tracks '{"packageName":"com.example.app"}'
+gps -p com.example.app call gps_list_reviews '{"maxResults":10}'
+```
+
+Write ops still need `--confirm`:
+
+```bash
+gps -p com.example.app --confirm call gps_reply_to_review \
+  '{"reviewId":"abc","replyText":"Thanks!"}'
+```

@@ -1,0 +1,35 @@
+{
+  "name": "@appeeky/google-play-store-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "gps-mcp internals (published via @appeeky/google-play-store-cli)",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "gps-mcp": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@appeeky/google-play-store-core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,74 @@
+---
+title: MCP setup
+description: Connect gps-mcp to Cursor, Claude Desktop, or other MCP clients.
+---
+
+## Install
+
+```bash
+npm install -g @appeeky/google-play-store-cli
+```
+
+This puts `gps-mcp` on your `PATH` (same package as `gps`).
+
+## Cursor / Claude Desktop
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "args": ["--credentials", "/path/to/service-account.json"]
+    }
+  }
+}
+```
+
+Using environment variables:
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/service-account.json"
+      }
+    }
+  }
+}
+```
+
+Read-only agent session:
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "args": ["--read-only", "--credentials", "/path/to/service-account.json"]
+    }
+  }
+}
+```
+
+## Verify
+
+After connecting, list tools in your client. You should see `gps_whoami`, `gps_list_accounts`, `gps_list_apps`, `gps_list_tracks`, and the rest of the registry, plus `gps_search_capabilities`.
+
+## Multi-account MCP
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "command": "gps-mcp",
+      "args": ["--account", "my-co"]
+    }
+  }
+}
+```
+
+Configure accounts in `~/.config/gps/config.json` (each with `credentialsPath`). Tools accept an optional `account` argument. See [Multi-account and apps](/authentication-accounts).
+
+Credentials: [Authentication](/authentication).

@@ -1,0 +1,117 @@
+---
+title: Quickstart
+description: Install gps from npm, authenticate with a service account, and run your first commands.
+---
+
+## Prerequisites
+
+- Node.js 20+
+- A Google Cloud **service account** with the Google Play Android Developer API enabled
+- That service account invited in Play Console → **Users and permissions** with the rights you need
+
+## Install
+
+```bash
+npm install -g @appeeky/google-play-store-cli
+```
+
+This installs both binaries:
+
+- `gps` — CLI
+- `gps-mcp` — MCP server
+
+```bash
+gps --help
+gps-mcp --help
+```
+
+Other package managers:
+
+```bash
+pnpm add -g @appeeky/google-play-store-cli
+yarn global add @appeeky/google-play-store-cli
+bun add -g @appeeky/google-play-store-cli
+```
+
+From source (contributors):
+
+```bash
+git clone https://github.com/appeeky/google-play-store-cli.git
+cd google-play-store-cli
+pnpm install && pnpm build
+```
+
+## Authenticate
+
+Export a path to your service-account JSON (recommended):
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
+```
+
+Or pass it per command:
+
+```bash
+gps --credentials /path/to/service-account.json whoami
+```
+
+See [Authentication](/authentication) for full precedence and config file support.
+
+## First commands
+
+```bash
+# Confirm identity
+gps whoami
+
+# Discover capabilities
+gps search review
+gps ops tracks
+
+# Inspect an app
+gps --package com.example.app --json tracks list
+gps --package com.example.app --json listings list
+gps --package com.example.app --json reviews list
+```
+
+## Multiple keys / apps
+
+One service account can access many apps (Play Console grants). Publisher API cannot list apps — register packages locally:
+
+```bash
+gps accounts add my-co --credentials ./sa.json --default-package com.example.app --default
+gps apps add com.example.app --account my-co --name "My App" --default
+gps apps list
+```
+
+See [Multi-account and apps](/authentication-accounts).
+
+Write operations require `--confirm`:
+
+```bash
+gps --package com.example.app deploy \
+  --file ./app-release.aab \
+  --track internal \
+  --confirm
+```
+
+## Call any operation
+
+Ergonomic CLI subcommands cover common workflows. Everything else is reachable via the shared registry:
+
+```bash
+gps ops monetization
+gps call gps_list_subscriptions '{"packageName":"com.example.app"}'
+```
+
+The same names are MCP tools — see [MCP setup](/mcp/setup).
+
+## Read-only mode
+
+Block commits and mutations:
+
+```bash
+gps --read-only --package com.example.app tracks list
+gps-mcp --read-only --credentials ./sa.json
+```
+
+Ephemeral edits used for **reads** (tracks, listings) still work in read-only mode; they are never committed.

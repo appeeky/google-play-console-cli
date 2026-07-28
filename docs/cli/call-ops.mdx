@@ -1,0 +1,42 @@
+---
+title: gps ops and gps call
+description: Discover and invoke the full operation registry from the CLI.
+---
+
+Dedicated subcommands cover common workflows. The operation registry covers the full Publisher surface exposed by this product.
+
+## List operations
+
+```bash
+gps ops
+gps ops monetization
+gps ops review --json
+```
+
+Also:
+
+```bash
+gps search rollout
+gps capabilities --json
+```
+
+## Invoke an operation
+
+```bash
+gps --package com.example.app call gps_list_reviews '{"maxResults":10}'
+
+gps call gps_list_tracks '{"packageName":"com.example.app"}'
+```
+
+- Arguments are a JSON object matching the operation schema.
+- If you pass `--package` globally and omit `packageName` in JSON, it is filled in automatically.
+- Write operations still require `--confirm`.
+
+```bash
+gps --package com.example.app --confirm call gps_reply_to_review '{
+  "reviewId": "REVIEW_ID",
+  "replyText": "Thanks for the feedback!"
+}'
+```
+
+MCP tools use the same operation names. See [MCP tools](/mcp/tools).

@@ -1,0 +1,30 @@
+---
+title: MCP overview
+description: Expose Google Play Publisher operations to AI agents over Model Context Protocol.
+---
+
+`gps-mcp` is a stdio MCP server that registers the shared operation catalog as tools.
+
+Agents can:
+
+- Inspect tracks, listings, reviews, and monetization catalogs
+- Deploy releases and manage rollouts (when not in read-only mode)
+- Reply to reviews and perform other write operations with your confirmation policies
+
+Tools share names with `gps call` (for example `gps_list_reviews`). Discovery helpers:
+
+- `gps_search_capabilities`
+- `gps_list_capabilities`
+
+## Transport
+
+Stdio only. Configure your client to spawn `gps-mcp` as a local process.
+
+## Safety
+
+| Mode | Behavior |
+|------|----------|
+| Default | Writes allowed (subject to Play Console permissions) |
+| `--read-only` | Mutations blocked; ephemeral read edits still work |
+
+See [Setup](/mcp/setup) and [Tools](/mcp/tools).
