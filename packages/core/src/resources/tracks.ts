@@ -4,6 +4,11 @@ import { assertPackageName, assertTrack } from "../validation.js";
 
 export type Track = androidpublisher_v3.Schema$Track;
 export type TrackRelease = androidpublisher_v3.Schema$TrackRelease;
+export type ReleaseSummary = androidpublisher_v3.Schema$ReleaseSummary;
+
+export interface ListReleaseSummariesOptions {
+  versionCode?: number | string;
+}
 
 export class TracksApi {
   constructor(private readonly client: PlayStoreClient) {}
@@ -95,6 +100,29 @@ export class TracksApi {
     return this.client.edits.withEphemeralEdit(packageName, async (editId) => {
       const current = await this.get(packageName, editId, track);
       return current.releases ?? [];
+    });
+  }
+
+  async listReleaseSummaries(
+    packageName: string,
+    track: string,
+    options: ListReleaseSummariesOptions = {},
+  ): Promise<ReleaseSummary[]> {
+    assertPackageName(packageName);
+    assertTrack(track);
+    return this.client.request(async () => {
+      const res = await this.client.publisher.applications.tracks.releases.list({
+        parent: `applications/${packageName}/tracks/${track}`,
+      });
+      const releases = res.data.releases ?? [];
+      if (options.versionCode === undefined) return releases;
+
+      const versionCode = String(options.versionCode);
+      return releases.filter((release) =>
+        release.activeArtifacts?.some(
+          (artifact) => String(artifact.versionCode) === versionCode,
+        ),
+      );
     });
   }
 

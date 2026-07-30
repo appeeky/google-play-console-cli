@@ -190,6 +190,56 @@ describe("edits.withEdit", () => {
   });
 });
 
+describe("tracks.listReleaseSummaries", () => {
+  it("reads lifecycle state and matches the exact version code", async () => {
+    let parent: string | undefined;
+    const publisher = {
+      applications: {
+        tracks: {
+          releases: {
+            list: async (params: { parent?: string }) => {
+              parent = params.parent;
+              return {
+                data: {
+                  releases: [
+                    {
+                      releaseName: "1.2.3",
+                      track: "production",
+                      activeArtifacts: [{ versionCode: 123 }],
+                      releaseLifecycleState:
+                        "RELEASE_LIFECYCLE_STATE_APPROVED_NOT_PUBLISHED",
+                    },
+                    {
+                      releaseName: "1.2.2",
+                      track: "production",
+                      activeArtifacts: [{ versionCode: 122 }],
+                      releaseLifecycleState: "RELEASE_LIFECYCLE_STATE_PUBLISHED",
+                    },
+                  ],
+                },
+              };
+            },
+          },
+        },
+      },
+    } as unknown as Parameters<typeof PlayStoreClient.fromPublisher>[0];
+
+    const client = PlayStoreClient.fromPublisher(publisher, { readOnly: true });
+    const releases = await client.tracks.listReleaseSummaries(
+      "com.example.app",
+      "production",
+      { versionCode: 123 },
+    );
+
+    expect(parent).toBe("applications/com.example.app/tracks/production");
+    expect(releases).toHaveLength(1);
+    expect(releases[0]?.activeArtifacts?.[0]?.versionCode).toBe(123);
+    expect(releases[0]?.releaseLifecycleState).toBe(
+      "RELEASE_LIFECYCLE_STATE_APPROVED_NOT_PUBLISHED",
+    );
+  });
+});
+
 describe("config multi-account", () => {
   it("registers accounts and apps and finds package owners", async () => {
     const { mkdtempSync, rmSync } = await import("node:fs");

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add read-only release lifecycle states with exact version-code matching.
+
 ## 0.1.0
 
 - Initial release: `@appeeky/google-play-store-core`, `gps` CLI, `gps-mcp`

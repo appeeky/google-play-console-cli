@@ -147,6 +147,23 @@ export const GPS_OPS: GpsOp[] = [
       c.tracks.listReleases(asString(a.packageName, "packageName"), asString(a.track, "track")),
   },
   {
+    name: "gps_list_release_summaries",
+    group: "tracks",
+    summary: "List release lifecycle states on a track",
+    write: false,
+    shape: {
+      packageName: pkg,
+      track: z.string(),
+      versionCode: z.union([z.string(), z.number()]).optional(),
+    },
+    run: async (c, a) =>
+      c.tracks.listReleaseSummaries(
+        asString(a.packageName, "packageName"),
+        asString(a.track, "track"),
+        { versionCode: a.versionCode as string | number | undefined },
+      ),
+  },
+  {
     name: "gps_update_track",
     group: "tracks",
     summary: "Update a track inside a committed edit",
