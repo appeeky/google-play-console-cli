@@ -18,9 +18,36 @@ gps -p com.example.app deploy \
 ```bash
 gps -p com.example.app tracks list
 gps -p com.example.app tracks get production
+gps -p com.example.app tracks releases production --version-code 123 --json
 gps -p com.example.app tracks promote --from beta --to production --user-fraction 0.05 --confirm
 gps -p com.example.app tracks rollout production --user-fraction 0.25 --confirm
 gps -p com.example.app tracks halt production --confirm
+```
+
+## Release lifecycle
+
+This command reads the lifecycle state without opening an edit:
+
+```bash
+gps -p com.example.app tracks releases production --version-code 123 --json
+```
+
+Match the exact version code in release gates.
+
+`RELEASE_LIFECYCLE_STATE_APPROVED_NOT_PUBLISHED` means Google approved the release.
+You must publish these changes in Play Console.
+The Android Publisher API does not support that final action.
+See the [release lifecycle API](https://developers.google.com/android-publisher/api-ref/rest/v3/applications.tracks.releases).
+See the [managed publishing guide](https://support.google.com/googleplay/android-developer/answer/9859654).
+
+The command also supports MCP and `gps call`:
+
+```bash
+gps call gps_list_release_summaries '{
+  "packageName": "com.example.app",
+  "track": "production",
+  "versionCode": 123
+}'
 ```
 
 Guides: [Deploy a release](/guides/deploy-release), [Staged rollout](/guides/staged-rollout).

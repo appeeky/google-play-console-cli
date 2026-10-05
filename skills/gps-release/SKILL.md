@@ -22,7 +22,13 @@ gps --package $PKG tracks promote --from internal --to beta --confirm
 gps --package $PKG tracks promote --from beta --to production --user-fraction 0.1 --confirm
 ```
 
-4. Expand or halt:
+4. Read the lifecycle state for the exact version:
+
+```bash
+gps --package $PKG tracks releases production --version-code $VERSION_CODE --json
+```
+
+5. Expand or halt:
 
 ```bash
 gps --package $PKG tracks list --json
@@ -35,4 +41,5 @@ gps --package $PKG tracks halt production --confirm
 - Never skip `--confirm` on writes.
 - Prefer internal/alpha before production.
 - Use `--validate-only` when dry-running supported commands.
-- MCP: `gps_deploy_app`, `gps_promote_release`, `gps_update_rollout`, `gps_halt_release`.
+- Publish approved managed releases in Play Console.
+- MCP: `gps_deploy_app`, `gps_promote_release`, `gps_list_release_summaries`, `gps_update_rollout`, `gps_halt_release`.

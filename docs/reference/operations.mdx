@@ -13,7 +13,7 @@ Write operations are marked **write** and require `--confirm` on the CLI (or age
 
 Most Publisher tools also accept an optional `account` argument for multi-key setups. See [Multi-account and apps](/authentication-accounts).
 
-Total operations: **129**
+Total operations: **130**
 
 ## accounts
 
@@ -53,6 +53,7 @@ Total operations: **129**
 | `gps_list_tracks` | read | List release tracks |
 | `gps_get_track` | read | Get a release track |
 | `gps_list_track_releases` | read | List releases on a track |
+| `gps_list_release_summaries` | read | List release lifecycle states on a track |
 | `gps_update_track` | **write** | Update a track inside a committed edit |
 | `gps_promote_release` | **write** | Promote a release between tracks |
 | `gps_update_rollout` | **write** | Update staged rollout fraction |

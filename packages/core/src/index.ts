@@ -53,3 +53,7 @@ export { ClientRegistry, type ClientRegistryOptions } from "./registry.js";
 
 export type { DeployOptions, DeployResult } from "./resources/deploy.js";
 export type { ImageType } from "./resources/listings.js";
+export type {
+  ReleaseSummary,
+  ListReleaseSummariesOptions,
+} from "./resources/tracks.js";

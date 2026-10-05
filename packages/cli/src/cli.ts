@@ -430,6 +430,37 @@ export function buildProgram(): Command {
     });
 
   tracks
+    .command("releases")
+    .description("List release lifecycle states without opening an edit")
+    .argument("<track>")
+    .option("--version-code <code>", "Match an exact active artifact version code")
+    .action(async (track: string, cmdOpts: { versionCode?: string }) => {
+      const opts = program.opts<GlobalOpts>();
+      const client = await clientFrom(opts);
+      const packageName = pkg(opts);
+      const result = await client.tracks.listReleaseSummaries(packageName, track, {
+        versionCode: cmdOpts.versionCode,
+      });
+      if (cmdOpts.versionCode !== undefined && result.length === 0) {
+        throw new Error(
+          `No active release with version code ${cmdOpts.versionCode} exists on track ${track}`,
+        );
+      }
+      if (opts.json) printJson(result);
+      else
+        printTable(
+          result.map((release) => ({
+            release: release.releaseName,
+            track: release.track,
+            versionCodes: release.activeArtifacts
+              ?.map((artifact) => artifact.versionCode)
+              .join(","),
+            lifecycleState: release.releaseLifecycleState,
+          })),
+        );
+    });
+
+  tracks
     .command("promote")
     .description("Promote a release from one track to another")
     .requiredOption("--from <track>")

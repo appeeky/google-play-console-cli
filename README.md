@@ -110,6 +110,7 @@ Details: [docs/authentication-accounts.mdx](./docs/authentication-accounts.mdx).
 ```bash
 gps --package com.example.app deploy --file ./app.aab --track internal --confirm
 gps --package com.example.app tracks promote --from internal --to beta --confirm
+gps --package com.example.app tracks releases production --version-code 123 --json
 gps --package com.example.app tracks rollout production --user-fraction 0.1 --confirm
 gps --package com.example.app tracks halt production --confirm
 ```
