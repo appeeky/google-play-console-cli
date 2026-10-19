@@ -96,7 +96,7 @@
       },
       {
         "group": "MCP",
-        "pages": ["mcp/overview", "mcp/setup", "mcp/tools"]
+        "pages": ["mcp/overview", "mcp/setup", "mcp/hosted", "mcp/tools"]
       },
       {
         "group": "SDK",
