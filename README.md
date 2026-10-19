@@ -165,6 +165,21 @@ gps-mcp --read-only --credentials ./sa.json
 
 See [docs/mcp/setup.mdx](./docs/mcp/setup.mdx).
 
+Hosted, without a key file (uses your Google Play connection in [Appeeky](https://appeeky.com)):
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "url": "https://gps-api.appeeky.com/mcp",
+      "headers": { "Authorization": "Bearer YOUR_APPEEKY_API_KEY" }
+    }
+  }
+}
+```
+
+See [docs/mcp/hosted.mdx](./docs/mcp/hosted.mdx).
+
 ## gps skills
 
 Agent Skills for automating `gps` workflows including releases, listings, reviews, monetization, MCP, and troubleshooting.

@@ -93,6 +93,25 @@ importers:
         specifier: ^5.8.3
         version: 5.9.3
 
+  packages/server:
+    dependencies:
+      '@appeeky/google-play-store-core':
+        specifier: workspace:*
+        version: link:../core
+      '@appeeky/google-play-store-mcp':
+        specifier: workspace:*
+        version: link:../mcp
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.11.0
+        version: 1.29.0(zod@3.25.76)
+      zod:
+        specifier: ^3.24.3
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
 packages:
 
   '@esbuild/aix-ppc64@0.25.12':

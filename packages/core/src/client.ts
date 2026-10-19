@@ -1,5 +1,5 @@
 import { google, androidpublisher_v3 } from "googleapis";
-import { GoogleAuth } from "google-auth-library";
+import { GoogleAuth, OAuth2Client } from "google-auth-library";
 import {
   resolveCredentials,
   type ResolveCredentialsOptions,
@@ -114,6 +114,26 @@ export class PlayStoreClient {
       auth: authClient as never,
     });
 
+    return new PlayStoreClient(credentials, publisher, options.readOnly ?? false);
+  }
+
+  /**
+   * Client for an already-issued OAuth access token (hosted mode: the token
+   * comes from Appeeky, the service-account key stays there). The token is
+   * not refreshed; build a new client per request.
+   */
+  static fromAccessToken(
+    accessToken: string,
+    options: { clientEmail: string; readOnly?: boolean },
+  ): PlayStoreClient {
+    const auth = new OAuth2Client();
+    auth.setCredentials({ access_token: accessToken });
+    const publisher = google.androidpublisher({ version: "v3", auth: auth as never });
+    // No private key here: only client_email is read from these credentials.
+    const credentials: ServiceAccountCredentials = {
+      client_email: options.clientEmail,
+      private_key: "",
+    };
     return new PlayStoreClient(credentials, publisher, options.readOnly ?? false);
   }
 

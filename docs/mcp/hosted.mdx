@@ -1,0 +1,57 @@
+---
+title: Hosted MCP and API
+description: Use gps without a key file, on the Google Play connection you set up in Appeeky.
+---
+
+The hosted server runs the same operations as `gps-mcp`, but your service-account key stays in Appeeky. Each call uses a short-lived Google token issued for that call.
+
+## Before you start
+
+1. Connect Google Play in [appeeky.com](https://appeeky.com) Settings.
+2. Copy your Appeeky API key from the same Settings page.
+
+Each tool call or operation counts against your Appeeky API credits, like other Play Console requests.
+
+## MCP
+
+```json
+{
+  "mcpServers": {
+    "google-play-store": {
+      "url": "https://gps-api.appeeky.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_APPEEKY_API_KEY"
+      }
+    }
+  }
+}
+```
+
+Start with `gps_list_apps` to see the packages your service account can use.
+
+## Read-only by default
+
+Operations that change your Play Console (releases, listings, prices, refunds, users) are hidden until you add this header:
+
+```json
+"X-GPS-Allow-Writes": "true"
+```
+
+Uploading bundles, APKs and images needs a local file, so those stay in the [CLI](/cli/overview).
+
+## REST
+
+| Method | Path | |
+| ------ | ---- | - |
+| `GET` | `/v1/apps` | Apps the connected service account can use |
+| `GET` | `/v1/ops` | Operations you can run |
+| `POST` | `/v1/ops/{name}` | Run one operation; the JSON body holds its arguments |
+
+```bash
+curl -X POST https://gps-api.appeeky.com/v1/ops/gps_list_tracks \
+  -H "Authorization: Bearer $APPEEKY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"packageName":"com.example.app"}'
+```
+
+Operation names and arguments match the [operations reference](/reference/operations).
