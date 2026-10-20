@@ -43,6 +43,12 @@ GPS_LIVE_TEST=1 GOOGLE_APPLICATION_CREDENTIALS=./sa.json pnpm test
 
 Do not commit service-account keys.
 
+## Releasing
+
+Releases are automatic. Every push to `main` runs CI, then `scripts/release.mjs` reads the [Conventional Commits](https://www.conventionalcommits.org) since the last `v*` tag: `feat:` is a minor bump, `fix:` and `perf:` are a patch, `!` or `BREAKING CHANGE:` is a major bump (minor while at 0.x). It sets the version on every workspace package, adds a section to `CHANGELOG.md`, publishes `@appeeky/google-play-store-cli` with `NPM_TOKEN`, tags `v<version>` and creates the GitHub release. `docs:`, `chore:`, `test:` and `refactor:` commits don't release.
+
+Preview a release with `node scripts/release.mjs --dry-run`.
+
 ## Docs
 
 Mintlify docs are in `[docs/](./docs)`. Preview with:
